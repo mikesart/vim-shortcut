@@ -6,6 +6,9 @@ let g:loaded_shortcut = 1
 if !exists('g:shortcuts')
   let g:shortcuts = {}
 endif
+if !exists('g:shortcuts_width')
+  let g:shortcuts_width = 30
+endif
 
 command! -range -bang Shortcuts <line1>,<line2>call s:shortcut_menu_command(<bang>0)
 command! -range -bang ShortcutsRangeless call s:shortcut_menu_command(<bang>0)
@@ -21,7 +24,7 @@ endfunction
 
 function! s:shortcut_menu_items() abort
   let labels = map(copy(g:shortcuts), 'ShortcutLeaderKeys(v:key)')
-  let width = max(map(values(labels), 'len(v:val)')) + 4
+  let width = g:shortcuts_width " max(map(values(labels), 'len(v:val)')) + 4
   return values(map(labels, "printf('%-".width."S\n%s', substitute(v:val, '<space>', ' ', 'g'), g:shortcuts[v:key])"))
 endfunction
 
