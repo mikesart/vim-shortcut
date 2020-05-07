@@ -15,7 +15,7 @@ function! s:shortcut_menu_command(fullscreen) range abort
   call fzf#run(fzf#wrap('Shortcuts', s:shortcut_menu_options({
         \ 'source': s:shortcut_menu_items(),
         \ 'sink': function('s:shortcut_menu_item_action'),
-        \ 'options': '--tiebreak=begin'
+        \ 'options': '--tiebreak=begin --no-sort'
         \ }), a:fullscreen))
 endfunction
 
